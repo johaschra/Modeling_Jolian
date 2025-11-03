@@ -647,7 +647,7 @@ if __name__ == "__main__":
         # *** Calculate Exner function and Montgomery potential ***
         #
 
-        # *** edit here ***
+        exn, mtg = diag_montgomery(prs, mtg, th0, topo, topofact)
 
         #
         # *** Exercise 2.2 Diagnostic computation of Montgomery ***
