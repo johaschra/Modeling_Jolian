@@ -542,11 +542,15 @@ if __name__ == "__main__":
         else:
             dtdx = dt / dx
 
+        
+        
+        
+        
         # *** Exercise 2.1 isentropic mass density ***
         # *** time step for isentropic mass density ***
         #
 
-        # *** edit here ***
+        snew = prog_isendens(sold, snow, unow, dtdx)
 
         #
         # *** Exercise 2.1 isentropic mass density ***
@@ -567,10 +571,12 @@ if __name__ == "__main__":
         # *** time step for momentum ***
         #
 
-        # *** edit here ***
+        unew = prog_velocity(uold, unow, mtg, dtdx)
 
         #
         # *** Exercise 2.1 velocity ***
+
+
 
         # exchange boundaries if periodic
         # -------------------------------------------------------------------------
@@ -717,7 +723,11 @@ if __name__ == "__main__":
         # *** Exercise 2.1 / 4.1 / 5.1 ***
         # *** exchange isentropic mass density and velocity ***
         # *** (later also qv,qc,qr,nc,nr) ***
-        # *** edit here ***
+        sold [:] = snow
+        snow [:] = snew
+        
+        uold [:] = unow
+        unow [:] = unew
         #
 
         if imoist == 1:
