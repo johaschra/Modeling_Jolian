@@ -53,12 +53,12 @@ def diag_montgomery(prs, mtg, th0, topo, topofact):
     exn = cp * (prs/pref)**(rdcp)
 
     # Add lower boundary condition at height mtg[:,0]
-    mtg[:,0] = g * topo.squeze() * topofact + th0[0] * exn
+    mtg[:, 0] = g * topo.squeeze() * topofact + th0[0] * exn[:, 0]
 
     # Integration loop upwards
-    for h in range(nz):
-        k=h+1
-        mtg[:,k] = mtg[:,k-1] + exn[:,k] * dth
+    for h in range(nz-1):
+        k = h+1
+        mtg[:, k] = mtg[:, k-1] + exn[:, k] * dth
 
     #
     # *** Exercise 2.2 Diagnostic computation  ***

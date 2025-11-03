@@ -41,15 +41,14 @@ def prog_isendens(sold, snow, unow, dtdx, dthetadt=None):
     # Declare
     snew = np.zeros_like(snow)
 
-    
-    i = nb +np.arange(0,nx)
-    
-    snew[i,:] = sold[i,:]-dtdx*(
-        snow[i+1,:]*0.5*(
-            unow[i+1,:]+unow[i+2,:]
-        )-
-        snow[i-1,:]*0.5*(
-            unow[i-1,:]+unow[i,:]
+    i = nb + np.arange(0, nx)
+
+    snew[i, :] = sold[i, :]-dtdx*(
+        snow[i+1, :]*0.5*(
+            unow[i+1, :]+unow[i+2, :]
+        ) -
+        snow[i-1, :]*0.5*(
+            unow[i-1, :]+unow[i, :]
         )
     )
 
@@ -86,13 +85,13 @@ def prog_velocity(uold, unow, mtg, dtdx, dthetadt=None):
     # Declare
     unew = np.zeros_like(unow)
 
-    i = nb +np.arange(0,nx)
+    i = nb + np.arange(0, nx+1)
 
-    unew[i,:] = uold[i,:] - unow[i,:]*dtdx*(
-        unow[i+1,:]-unow[i-1,:]
-        ) - (
-            2*dtdx*(mtg[i,:]-mtg[i-1,:])
-        )
+    unew[i, :] = uold[i, :] - unow[i, :]*dtdx*(
+        unow[i+1, :]-unow[i-1, :]
+    ) - (
+        2*dtdx*(mtg[i, :]-mtg[i-1, :])
+    )
 
     return unew
 
