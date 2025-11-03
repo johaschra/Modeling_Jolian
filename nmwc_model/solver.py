@@ -638,7 +638,7 @@ if __name__ == "__main__":
         # *** Diagnostic computation of pressure ***
         #
 
-        # *** edit here ***
+        prs = diag_pressure(prs0, prs, snew)
 
         #
         # *** Exercise 2.2 Diagnostic computation of pressure ***
