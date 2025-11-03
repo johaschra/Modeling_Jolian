@@ -50,13 +50,15 @@ def diag_montgomery(prs, mtg, th0, topo, topofact):
     #
 
     # Computation of Exner function
-    # *** edit here ***
+    exn = cp * (prs/pref)**(rdcp)
 
     # Add lower boundary condition at height mtg[:,0]
-    # *** edit here ***
+    mtg[:,0] = g * topo.squeze() * topofact + th0[0] * exn
 
     # Integration loop upwards
-    # *** edit here ***
+    for h in range(nz):
+        k=h+1
+        mtg[:,k] = mtg[:,k-1] + exn[:,k] * dth
 
     #
     # *** Exercise 2.2 Diagnostic computation  ***
