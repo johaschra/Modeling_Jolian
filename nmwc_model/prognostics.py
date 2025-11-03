@@ -41,12 +41,18 @@ def prog_isendens(sold, snow, unow, dtdx, dthetadt=None):
     # Declare
     snew = np.zeros_like(snow)
 
-    # *** Exercise 2.1/5.2 isentropic mass density ***
-    # *** time step for isentropic mass density ***
-    # *** edit here ***
-    #
+    
+    i = nb +np.arange(0,nx)
+    
+    snew[i,:] = sold[i,:]-dtdx*(
+        snow[i+1,:]*0.5*(
+            unow[i+1,:]+unow[i+2,:]
+        )-
+        snow[i-1,:]*0.5*(
+            unow[i-1,:]+unow[i,:]
+        )
+    )
 
-    #
     # *** Exercise 2.1/5.2 isentropic mass density ***
 
     return snew
@@ -80,13 +86,13 @@ def prog_velocity(uold, unow, mtg, dtdx, dthetadt=None):
     # Declare
     unew = np.zeros_like(unow)
 
-    # *** Exercise 2.1/5.2 velocity ***
-    # *** time step for momentum ***
-    # *** edit here ***
-    #
+    i = nb +np.arange(0,nx)
 
-    #
-    # *** Exercise 2.1/5.2 velocity ***
+    unew[i,:] = uold[i,:] - unow[i,:]*dtdx*(
+        unow[i+1,:]-unow[i-1,:]
+        ) - (
+            2*dtdx*(mtg[i,:]-mtg[i-1,:])
+        )
 
     return unew
 
