@@ -104,13 +104,12 @@ def diag_pressure(prs0, prs, snew):
     #
 
     # Upper boundary condition
-    # *** edit here ***
+    prs[:, -1] = prs0[-1]
 
     # Integration loop downwards
-    # *** edit here ***
-
-    #
-    # *** Exercise 2.2 Diagnostic computation of pressure ***
+    for h in range(nz):
+        k = nz-h
+        prs[:, k] = prs[:, k+1] + dth*snew[:, k]*g
 
     return prs
 
@@ -176,7 +175,8 @@ def diag_density_and_temperature(s, exn, zht, th0):
     rho[:, k] = s * (th[:, k + 1] - th[:, k]) / (zht[:, k + 1] - zht[:, k])
 
     temp = np.zeros_like(s)
-    temp[:, k] = 0.5 * (th[:, k] * exn[:, k] + th[:, k + 1] * exn[:, k + 1]) / cp
+    temp[:, k] = 0.5 * (th[:, k] * exn[:, k] +
+                        th[:, k + 1] * exn[:, k + 1]) / cp
 
     return rho, temp
 
