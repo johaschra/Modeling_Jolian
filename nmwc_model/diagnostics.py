@@ -50,10 +50,13 @@ def diag_montgomery(prs, mtg, th0, topo, topofact):
     #
 
     # Computation of Exner function
+    exn = np.zeros_like(prs)
+
     exn = cp * (prs/pref)**(rdcp)
 
     # Add lower boundary condition at height mtg[:,0]
     mtg[:, 0] = g * topo.squeeze() * topofact + th0[0] * exn[:, 0]
+    mtg[:, 0] = mtg[:, 0] + dth*0.5*exn[:, 0]
 
     # Integration loop upwards
     for h in range(nz-1):
@@ -110,9 +113,8 @@ def diag_pressure(prs0, prs, snew):
 
     # Integration loop downwards
     for h in range(nz):
-        k = nz-h
+        k = nz-h-1  # go from the top to the bottom but skip the first step because boundary condis
         prs[:, k] = prs[:, k+1] + dth*snew[:, k]*g
-
     return prs
 
 

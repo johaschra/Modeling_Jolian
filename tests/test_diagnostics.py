@@ -22,6 +22,7 @@ def test_pressure():
     prs = diagnostics.diag_pressure(ds["prs0"], prs, ds["snew"])
 
     # validation
+    
     utils.compare_arrays(prs, ds["prs_val"])
 
 
@@ -67,7 +68,8 @@ def test_height():
 
 def test_density_and_temperature():
     # load reference data
-    ds = np.load("baseline_datasets/test_diagnostics/test_density_and_temperature.npz")
+    ds = np.load(
+        "baseline_datasets/test_diagnostics/test_density_and_temperature.npz")
 
     # hack
     diagnostics.__dict__["nz"] = ds["nz"]
