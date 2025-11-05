@@ -126,11 +126,11 @@ if __name__ == "__main__":
     if imoist == 1:
         # precipitation
         prec = np.zeros(nxb)
-        PREC = np.zeros((nout, nx))  #  auxiliary field for output
+        PREC = np.zeros((nout, nx))  # auxiliary field for output
 
         # accumulated precipitation
         tot_prec = np.zeros(nxb)
-        TOT_PREC = np.zeros((nout, nx))  #  auxiliary field for output
+        TOT_PREC = np.zeros((nout, nx))  # auxiliary field for output
 
         # specific humidity
         qvold = np.zeros((nxb, nz))
@@ -370,14 +370,18 @@ if __name__ == "__main__":
 
     # *** Exercise 3.1 height-dependent diffusion coefficient ***
     # *** edit here ***
-    #
+
+    idx = np.arange(nz)
+    tau[nz-nab:nz] += (diffabs-diff) * \
+        (np.sin(np.pi*0.5*((idx[nz-nab:nz]-(nz-nab-1))/nab)))**2
 
     # *** Exercise 3.1 height-dependent diffusion coefficient ***
 
     # output initial fields
     its_out = -1  # output index
     if iiniout == 1 and imoist == 0:
-        its_out, Z, U, S, T = makeoutput(unow, snow, zhtnow, its_out, 0, Z, U, S, T)
+        its_out, Z, U, S, T = makeoutput(
+            unow, snow, zhtnow, its_out, 0, Z, U, S, T)
     elif iiniout == 1 and imoist == 1:
         if imicrophys == 0 or imicrophys == 1:
             if idthdt == 0:
@@ -542,10 +546,6 @@ if __name__ == "__main__":
         else:
             dtdx = dt / dx
 
-        
-        
-        
-        
         # *** Exercise 2.1 isentropic mass density ***
         # *** time step for isentropic mass density ***
         #
@@ -575,8 +575,6 @@ if __name__ == "__main__":
 
         #
         # *** Exercise 2.1 velocity ***
-
-
 
         # exchange boundaries if periodic
         # -------------------------------------------------------------------------
@@ -698,9 +696,11 @@ if __name__ == "__main__":
                 # Stagger lheat to model levels and compute tendency
                 k = np.arange(1, nz)
                 if imicrophys == 1:
-                    dthetadt[:, k] = topofact * 0.5 * (lheat[:, k - 1] + lheat[:, k]) / dt
+                    dthetadt[:, k] = topofact * 0.5 * \
+                        (lheat[:, k - 1] + lheat[:, k]) / dt
                 else:
-                    dthetadt[:, k] = topofact * 0.5 * (lheat[:, k - 1] + lheat[:, k]) / (2.0 * dt)
+                    dthetadt[:, k] = topofact * 0.5 * \
+                        (lheat[:, k - 1] + lheat[:, k]) / (2.0 * dt)
 
                 # force dthetadt to zeros at the bottom and at the top
                 dthetadt[:, 0] = 0.0
@@ -713,7 +713,8 @@ if __name__ == "__main__":
                 else:
                     # Relax latent heat fields
                     # ----------------------------
-                    dthetadt = relax(dthetadt, nx, nb, dthetadtbnd1, dthetadtbnd2)
+                    dthetadt = relax(dthetadt, nx, nb,
+                                     dthetadtbnd1, dthetadtbnd2)
             else:
                 dthetadt = np.zeros((nxb, nz1))
 
@@ -723,11 +724,11 @@ if __name__ == "__main__":
         # *** Exercise 2.1 / 4.1 / 5.1 ***
         # *** exchange isentropic mass density and velocity ***
         # *** (later also qv,qc,qr,nc,nr) ***
-        sold [:] = snow
-        snow [:] = snew
-        
-        uold [:] = unow
-        unow [:] = unew
+        sold[:] = snow
+        snow[:] = snew
+
+        uold[:] = unow
+        unow[:] = unew
         #
 
         if imoist == 1:
