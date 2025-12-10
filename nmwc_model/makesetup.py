@@ -212,7 +212,17 @@ def makeprofile(
         # *** use indices k_shl, k_sht, and wind speeds u00_sh, u00
         #
 
-        # *** edit here ***
+        # wind below k=k_shl: u00_sh
+        u0[:k_shl] = u00_sh
+
+        # wind betweeen k=k_shl and k=k_sht lin decrease
+        u0[k_shl:k_sht] = np.linspace(u00_sh, u00, (k_sht-k_shl))
+
+        # wind above k=K_shl is u00
+        # is already there
+
+        
+
 
         #
         # *** Exercise 3.3 Downslope windstorm ***
