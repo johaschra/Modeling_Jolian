@@ -135,13 +135,22 @@ def prog_moisture(unow, qvold, qcold, qrold, qvnow, qcnow, qrnow, dtdx, dthetadt
         print("Prognostic step: Moisture scalars ...\n")
 
     # Declare
-    qvnew = np.zeros_like(qvnow)
-    qcnew = np.zeros_like(qcnow)
-    qrnew = np.zeros_like(qrnow)
+    qvnew = np.zeros_like(qvnow) # water vapour
+    qcnew = np.zeros_like(qcnow) # cloud liquid
+    qrnew = np.zeros_like(qrnow) # rain water
 
     # *** Exercise 4.1/5.2 moisture advection ***
-    # *** edit here ***
-    #
+
+    i = nb + np.arange(0, nx+1)
+    qvnew[i, :] = qvold[i, :] - dtdx * (
+    unow[i, :] * (qvnow[i+1, :] - qvnow[i-1, :])
+    )
+    qcnew[i, :] = qcold[i, :] - dtdx * (
+    unow[i, :] * (qcnow[i+1, :] - qcnow[i-1, :])
+    )
+    qrnew[i, :] = qrold[i, :] - dtdx * (
+    unow[i, :] * (qrnow[i+1, :] - qrnow[i-1, :])
+    )
 
     #
     # *** Exercise 4.1/5.2  ***
