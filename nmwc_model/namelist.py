@@ -10,13 +10,13 @@ and all subfunctions.
 
 # Output control
 # -------------------------------------------------
-out_fname = "output_ex3.3"  # file name of output
+out_fname = "output_ex3.3b"  # file name of output
 iout = 360  # write every iout-th time-step into the output file
 iiniout = 1  # write initial field (0 = no, 1 = yes)
 
 # Domain size
 # -------------------------------------------------
-xl = 500* 1000.0  # domain size  [m]
+xl = 500 * 1000.0  # domain size  [m]
 nx = 100  # number of grid points in horizontal direction
 dx = xl / nx  # horizontal resolution [m]
 thl = 150.0  # domain depth  [K]
@@ -38,9 +38,9 @@ bv00 = 0.015  # Brunt-Vaisalla frequency [1/s]
 th00 = 300.0  # potential temperature at surface
 
 ishear = 1  # wind shear simulation (0 = no shear, 1 = shear)
-k_shl = 5  # bottom level of wind shear layer (ishear = 1) ~ 5 km
+k_shl = 27  # bottom level of wind shear layer (ishear = 1) ~ 5 km
 # bottom level of wind layer is 0 (index)
-k_sht = 10  # top level of wind shear layer (ishear = 1) ~ 7 km
+k_sht = 34  # top level of wind shear layer (ishear = 1) ~ 7 km
 # top level of wind layer is nz-1 (index)
 u00_sh = 10.0  # initial velocity below shear layer [m/s] (ishear = 1)
 # u00 is speed above shear layer [m/s]   #orig 0.
