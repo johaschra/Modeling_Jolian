@@ -567,11 +567,8 @@ if __name__ == "__main__":
         #
         # *** Exercise 4.1 / 5.1 moisture scalars ***
 
-        qnew = prog_moisture(unow, qvold, qcold, qrold, qvnow, qcnow, qrnow, dtdx)
-
-        qvnew[qvnew < 0.0] = 0.0
-        qcnew[qcnew < 0.0] = 0.0
-        qrnew[qrnew < 0.0] = 0.0
+            qvnew, qcnew, qrnew = prog_moisture(unow, qvold, qcold, qrold,
+                                                qvnow, qcnow, qrnow, dtdx)
 
         # *** Exercise 2.1 velocity ***
         # *** time step for momentum ***
@@ -665,7 +662,9 @@ if __name__ == "__main__":
         if imoist == 1:
             # *** Exercise 4.1 Moisture ***
             # *** Clipping of negative values ***
-            # *** edit here ***
+            qvnew[qvnew < 0.0] = 0.0
+            qcnew[qcnew < 0.0] = 0.0
+            qrnew[qrnew < 0.0] = 0.0
             #
 
             if idbg == 1:
@@ -677,7 +676,10 @@ if __name__ == "__main__":
         if imoist == 1 and imicrophys == 1:
             # *** Exercise 4.2 Kessler ***
             # *** Kessler scheme ***
-            # *** edit here ***
+
+            lheat, qvnew, qcnew, qrnew, prec, tot_prec = kessler(
+                snew, qvnew, qcnew, qrnew, prs,
+                exn, zhtnow, th0, prec, tot_prec)
             #
 
             if idbg == 1:
@@ -738,6 +740,15 @@ if __name__ == "__main__":
         #
 
         if imoist == 1:
+            qvold[:] = qvnow
+            qvnow[:] = qvnew
+
+            qcold[:] = qcnow
+            qcnow[:] = qcnew
+
+            qrold[:] = qrnow
+            qrnow[:] = qrnew
+
             if idbg == 1:
                 print("exchange moisture variables")
 
@@ -942,5 +953,6 @@ if __name__ == "__main__":
 
     if itime == 1:
         print("Total elapsed computation time: %g s\n" % (t1 - t0))
+
 
 # END OF SOLVER.PY

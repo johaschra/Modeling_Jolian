@@ -140,7 +140,7 @@ def prog_moisture(unow, qvold, qcold, qrold, qvnow, qcnow, qrnow, dtdx, dthetadt
     qrnew = np.zeros_like(qrnow) # rain water
 
     # *** Exercise 4.1/5.2 moisture advection ***
-
+    
     i = nb + np.arange(0, nx+1)
     qvnew[i, :] = qvold[i, :] - dtdx * (
     unow[i, :] * (qvnow[i+1, :] - qvnow[i-1, :])

@@ -21,13 +21,13 @@ nx = 100  # number of grid points in horizontal direction
 dx = xl / nx  # horizontal resolution [m]
 thl = 150.0  # domain depth  [K]
 nz = 60  # vertical resolution
-dt = 1  # time step [s]
+dt = 10  # time step [s]
 diff = 0.02  # (horizontal) diffusion coefficient
 time = 24 * 60 * 60  # integration time [s]
 
 # Topography
 # -------------------------------------------------
-topomx = 1400  # mountain height [m]
+topomx = 0  # mountain height [m]
 topowd = 25 * 1000  # mountain half width [m]
 topotim = 1800  # mountain growth time [s]
 
@@ -61,8 +61,8 @@ itime = 1  # print computation time (0 = not print, 1 = print)
 # Physics: Moisture
 # -------------------------------------------------
 imoist = 1  # include moisture (0 = dry, 1 = moist)
-imoist_diff = 0  # apply diffusion to qv, qc, qr (0 = off, 1 = on)
-imicrophys = 0  # include microphysics (0 = off, 1 = kessler, 2 = two moment)
+imoist_diff = 1  # apply diffusion to qv, qc, qr (0 = off, 1 = on)
+imicrophys = 1  # include microphysics (0 = off, 1 = kessler, 2 = two moment)
 idthdt = 0  # couple physics to dynamics (0 = off, 1 = on)
 iern = 0  # evaporation of rain droplets (0 = off, 1 = on)
 

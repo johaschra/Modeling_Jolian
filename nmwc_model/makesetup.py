@@ -221,9 +221,6 @@ def makeprofile(
         # wind above k=K_shl is u00
         # is already there
 
-        
-
-
         #
         # *** Exercise 3.3 Downslope windstorm ***
     else:
@@ -239,20 +236,21 @@ def makeprofile(
         # *** for rh0; then use function rrmixv1 to compute qv0 ***
         #
 
-        #rh0 is zero everywhere in the beginning
+        # rh0 is zero everywhere in the beginning
         rhmax = 0.98
         kc = 12
         kw = 10
 
-        rh0[kc-kw:kc+kw] = rhmax * (np.cos(np.linspace(-kw,kw,(2 * kw ))/kw*np.pi/2))**2
+        rh0[kc-kw:kc+kw] = rhmax * \
+            (np.cos(np.linspace(-kw, kw, (2 * kw))/kw*np.pi/2))**2
 
         # compute qv0
-
-        qv0[k] = rrmixv1(
-            0.5*(prs0[k]+prs0[k+1])/100, 
-            0.5*(th0[k]/cp*exn0[k]+th0[k+1]/cp*exn0[k+1]),
-            rh0[k],
-            2)
+        for k in range(nz):
+            qv0[k] = rrmixv1(
+                0.5*(prs0[k]+prs0[k+1])/100,
+                0.5*(th0[k]/cp*exn0[k]+th0[k+1]/cp*exn0[k+1]),
+                rh0[k],
+                2)
 
         #
         # *** Exercise 4.1 Initial Moisture profile ***
@@ -279,9 +277,9 @@ def makeprofile(
         qvnow = qv0 * np.ones_like(qvold, dtype=float)
 
         #         # Wave-like perturbation to check tracer advection
-        #         wave = np.sin(np.linspace(0, 2*np.pi, len(qvold)))**2
-        #         qvold *= wave[:, None]
-        #         qvnow *= wave[:, None]
+        wave = np.sin(np.linspace(0, 2*np.pi, len(qvold)))**2
+        qvold *= wave[:, None]
+        qvnow *= wave[:, None]
 
         qcold = qc0 * np.ones_like(qcold, dtype=float)
         qcnow = qc0 * np.ones_like(qcold, dtype=float)
