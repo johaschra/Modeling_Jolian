@@ -371,9 +371,12 @@ if __name__ == "__main__":
     # *** Exercise 3.1 height-dependent diffusion coefficient ***
     # *** edit here ***
 
-    idx = np.arange(nz)
-    tau[nz-nab:nz] += (diffabs-diff) * \
-        (np.sin(np.pi*0.5*((idx[nz-nab:nz]-(nz-nab-1))/nab)))**2
+    if nab > 0:
+            idx = np.arange(nz)
+            sl = slice(nz - nab, nz)
+
+            arg = (idx[sl] - (nz - nab - 1)) / nab
+            tau[sl] += (diffabs - diff) * (np.sin(np.pi * 0.5 * arg))**2
 
     # *** Exercise 3.1 height-dependent diffusion coefficient ***
 
