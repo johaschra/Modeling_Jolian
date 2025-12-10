@@ -567,6 +567,12 @@ if __name__ == "__main__":
         #
         # *** Exercise 4.1 / 5.1 moisture scalars ***
 
+        qnew = prog_moisture(unow, qvold, qcold, qrold, qvnow, qcnow, qrnow, dtdx)
+
+        qvnew[qvnew < 0.0] = 0.0
+        qcnew[qcnew < 0.0] = 0.0
+        qrnew[qrnew < 0.0] = 0.0
+
         # *** Exercise 2.1 velocity ***
         # *** time step for momentum ***
         #

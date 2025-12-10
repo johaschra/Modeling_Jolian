@@ -35,7 +35,7 @@ topotim = 1800  # mountain growth time [s]
 # -------------------------------------------------
 u00 = 0  # initial velocity [m/s]
 bv00 = 0.015  # Brunt-Vaisalla frequency [1/s]
-th00 = 300.0  # potential temperature at surface
+th00 = 280.0  # potential temperature at surface
 
 ishear = 1  # wind shear simulation (0 = no shear, 1 = shear)
 k_shl = 27  # bottom level of wind shear layer (ishear = 1) ~ 5 km
@@ -60,7 +60,7 @@ itime = 1  # print computation time (0 = not print, 1 = print)
 
 # Physics: Moisture
 # -------------------------------------------------
-imoist = 0  # include moisture (0 = dry, 1 = moist)
+imoist = 1  # include moisture (0 = dry, 1 = moist)
 imoist_diff = 0  # apply diffusion to qv, qc, qr (0 = off, 1 = on)
 imicrophys = 0  # include microphysics (0 = off, 1 = kessler, 2 = two moment)
 idthdt = 0  # couple physics to dynamics (0 = off, 1 = on)

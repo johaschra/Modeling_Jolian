@@ -239,7 +239,20 @@ def makeprofile(
         # *** for rh0; then use function rrmixv1 to compute qv0 ***
         #
 
-        # *** edit here ***
+        #rh0 is zero everywhere in the beginning
+        rhmax = 0.98
+        kc = 12
+        kw = 10
+
+        rh0[kc-kw:kc+kw] = rhmax * (np.cos(np.linspace(-kw,kw,(2 * kw ))/kw*np.pi/2))**2
+
+        # compute qv0
+
+        qv0[k] = rrmixv1(
+            0.5*(prs0[k]+prs0[k+1])/100, 
+            0.5*(th0[k]/cp*exn0[k]+th0[k+1]/cp*exn0[k+1]),
+            rh0[k],
+            2)
 
         #
         # *** Exercise 4.1 Initial Moisture profile ***
