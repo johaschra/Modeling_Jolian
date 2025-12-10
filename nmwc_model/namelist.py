@@ -10,7 +10,7 @@ and all subfunctions.
 
 # Output control
 # -------------------------------------------------
-out_fname = "output_ex3.2"  # file name of output
+out_fname = "output_ex3.3"  # file name of output
 iout = 360  # write every iout-th time-step into the output file
 iiniout = 1  # write initial field (0 = no, 1 = yes)
 
@@ -21,9 +21,9 @@ nx = 100  # number of grid points in horizontal direction
 dx = xl / nx  # horizontal resolution [m]
 thl = 150.0  # domain depth  [K]
 nz = 60  # vertical resolution
-dt = 10  # time step [s]
+dt = 1  # time step [s]
 diff = 0.02  # (horizontal) diffusion coefficient
-time = 100 * 60 * 60  # integration time [s]
+time = 24 * 60 * 60  # integration time [s]
 
 # Topography
 # -------------------------------------------------
@@ -34,20 +34,20 @@ topotim = 1800  # mountain growth time [s]
 # Initial atmosphere
 # -------------------------------------------------
 u00 = 0  # initial velocity [m/s]
-bv00 = 0.01  # Brunt-Vaisalla frequency [1/s]
+bv00 = 0.015  # Brunt-Vaisalla frequency [1/s]
 th00 = 300.0  # potential temperature at surface
 
 ishear = 1  # wind shear simulation (0 = no shear, 1 = shear)
-k_shl = 5  # bottom level of wind shear layer (ishear = 1)
+k_shl = 5  # bottom level of wind shear layer (ishear = 1) ~ 5 km
 # bottom level of wind layer is 0 (index)
-k_sht = 7  # top level of wind shear layer (ishear = 1)
+k_sht = 10  # top level of wind shear layer (ishear = 1) ~ 7 km
 # top level of wind layer is nz-1 (index)
 u00_sh = 10.0  # initial velocity below shear layer [m/s] (ishear = 1)
 # u00 is speed above shear layer [m/s]   #orig 0.
 
 # Boundaries
 # -------------------------------------------------
-nab = 30  # number of grid points in absorber
+nab = 30  # number of grid points in absorber (reduced from 30 to avoid NaN)
 diffabs = 1.0  # maximum value of absorber
 irelax = 1  # lateral boundaries (0 = periodic, 1 = relax)
 nb = 2  # number of boundary points on each side

@@ -216,7 +216,7 @@ def makeprofile(
         u0[:k_shl] = u00_sh
 
         # wind betweeen k=k_shl and k=k_sht lin decrease
-        u0[k_shl:k_sht] = np.linspace(u00_sh, u00, (k_sht-k_shl))
+        u0[k_shl:k_sht+1] = np.linspace(u00_sh, u00, (k_sht-k_shl+1))
 
         # wind above k=K_shl is u00
         # is already there
